@@ -79,7 +79,7 @@ var todoList = ( _ => {
 						<button data-status="yet" type="button" class="btn btn-default btn-status">Yet</button>
 					</td>
 					<td class="taskName">
-						${data.text}
+						${$('<textarea>').text(data.text).html()}
 						<span class="glyphicon glyphicon-remove btn-del pull-right" aria-hidden="true"></span>
 					</td>
 				</tr>`
@@ -97,7 +97,7 @@ var todoList = ( _ => {
 							<button data-status=${val.isDone ? 'done' : 'yet'} type="button" class="btn btn-default btn-status">${val.isDone ? 'Done' : 'Yet'}</button>
 						</td>
 						<td class="taskName">
-							${val.text}
+							${$('<textarea>').text(val.text).html()}
 							<span class="glyphicon glyphicon-remove btn-del pull-right" aria-hidden="true"></span>
 						</td>
 					</tr>`
