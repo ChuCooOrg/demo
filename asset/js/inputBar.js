@@ -31,7 +31,8 @@ var inputBar = ( _ => {
 				},
 				crossDomain: true, 
 				success: function(data) {
-					todoList.addTask(data)
+					todoList.addTask(data);
+					$inputWrap.find('#newTask').val('');
 				}, 
 				error: function(jqXHR) {
 					console.dir(jqXHR);
