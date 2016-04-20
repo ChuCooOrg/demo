@@ -13,6 +13,13 @@ var inputBar = ( _ => {
 
 	function _bindEvent() {
 		$inputWrap.on('click.addTask', '#btn-add', _handleAddTask);
+		$inputWrap.on('keypress.addTask', '#newTask', _handlePressEnter);
+	}
+
+	function _handlePressEnter(e) {
+		if(e.which == 13) {
+			_handleAddTask();
+		}
 	}
 
 	function _handleAddTask() {
