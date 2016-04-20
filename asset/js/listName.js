@@ -13,6 +13,13 @@ var listName = ( _ => {
 
 	function _bindEvent() {
 		$listNameWrap.on('click.setList', '#btn-setList', handleSetList);
+		$listNameWrap.on('keypress.setList', '#listName', _handlePressEnter);
+	}
+
+	function _handlePressEnter(e) {
+		if(e.which == 13) {
+			handleSetList();
+		}
 	}
 
 	function handleSetList() {
