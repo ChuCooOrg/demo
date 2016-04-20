@@ -1,0 +1,21 @@
+.row {
+	margin-bottom: 10px;
+}
+#wrapper {
+	margin-top: 50px;
+}
+#todoList th, 
+#todoList td {
+	text-align: center;
+}
+#todoList .taskStatus {
+	width: 50px;
+}
+#todoList .btn-del {
+	color: red;
+	cursor: pointer;
+	display: none;
+}
+#todoList .tasks:hover .btn-del {
+	display: initial;
+}
