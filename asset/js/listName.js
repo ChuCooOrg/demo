@@ -37,9 +37,8 @@ var listName = ( _ => {
 				},
 				crossDomain: true, 
 				success: function(data) {
-					if(data.tasks.length) {
-						todoList.render(data.tasks);
-					} else {
+					todoList.render(data.tasks);
+					if(!data.tasks.length) {
 						alert('Has any task yet.\n Just add one.');
 					}
 				}, 
