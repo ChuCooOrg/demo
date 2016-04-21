@@ -1,4 +1,3 @@
-var BASE_URL = BASE_URL || 'https://richegg.tw/';
 var listName = ( _ => {
 	var $listNameWrap;
 

@@ -1,4 +1,3 @@
-var BASE_URL = BASE_URL || 'https://richegg.tw/';
 var todoList = ( _ => {
 	var $list;
 
