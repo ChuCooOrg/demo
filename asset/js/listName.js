@@ -1,31 +1,29 @@
-var listName = ( _ => {
-	var $listNameWrap;
+var $listNameWrap = Symbol('$listNameWrap');
+class ListName {
+	constructor() {
+		// cache DOM
+		this[$listNameWrap] = $('#listNameWrap');
 
-	function init() {
-		_cacheDOM();
-		_bindEvent();
+		// bind event
+		this[$listNameWrap]
+			.off('click.setList')
+			.on('click.setList', '#btn-setList', this._handleSetList.bind(this));
+		this[$listNameWrap]
+			.off('keypress.setList')
+			.on('keypress.setList', '#listName', this._handlePressEnter.bind(this));
 	}
 
-	function _cacheDOM() {
-		$listNameWrap = $('#listNameWrap');
-	}
-
-	function _bindEvent() {
-		$listNameWrap.on('click.setList', '#btn-setList', handleSetList);
-		$listNameWrap.on('keypress.setList', '#listName', _handlePressEnter);
-	}
-
-	function _handlePressEnter(e) {
+	_handlePressEnter(e) {
 		if(e.which == 13) {
-			handleSetList();
+			this._handleSetList();
 		}
 	}
 
-	function handleSetList() {
-		var listName = $listNameWrap.find('#listName').val();
+	_handleSetList() {
+		var listName = this[$listNameWrap].find('#listName').val();
 		if(listName) {
 			$.ajax({
-				url: `${BASE_URL}lists`, 
+				url: `${App.BASE_URL}lists`, 
 				type: 'post', 
 				dataType: 'json', 
 				contentType: "application/json; charset=utf-8",
@@ -37,7 +35,7 @@ var listName = ( _ => {
 				},
 				crossDomain: true, 
 				success: function(data) {
-					todoList.render(data.tasks);
+					App.todoList.render(data.tasks);
 					if(!data.tasks.length) {
 						alert('Has any task yet.\n Just add one.');
 					}
@@ -48,9 +46,4 @@ var listName = ( _ => {
 			});
 		}
 	}
-
-	return {
-		init, 
-		handleSetList
-	}
-})();
+}

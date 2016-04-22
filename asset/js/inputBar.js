@@ -1,31 +1,33 @@
-var inputBar = ( _ => {
-	var $inputWrap;
+var $inputWrap = Symbol('$inputWrap');
+class InputBar {
+	constructor() {
+		// cache DOM
+		this[$inputWrap] = $('#inputWrap');
 
-	function init() {
-		_cacheDOM();
-		_bindEvent();
+		// bind event
+		this._bindEvent();
 	}
 
-	function _cacheDOM() {
-		$inputWrap = $('#inputWrap');
+	_bindEvent() {
+		this[$inputWrap]
+			.off('click.addTask')
+			.on('click.addTask', '#btn-add', this._handleAddTask.bind(this));
+		this[$inputWrap]
+			.off('keypress.addTask')
+			.on('keypress.addTask', '#newTask', this._handlePressEnter.bind(this));
 	}
 
-	function _bindEvent() {
-		$inputWrap.on('click.addTask', '#btn-add', _handleAddTask);
-		$inputWrap.on('keypress.addTask', '#newTask', _handlePressEnter);
-	}
-
-	function _handlePressEnter(e) {
+	_handlePressEnter(e) {
 		if(e.which == 13) {
-			_handleAddTask();
+			this._handleAddTask();
 		}
 	}
 
-	function _handleAddTask() {
-		var text = $inputWrap.find('#newTask').val();
+	_handleAddTask() {
+		var text = this[$inputWrap].find('#newTask').val();
 		if(text) {
 			$.ajax({
-				url: `${BASE_URL}tasks`, 
+				url: `${App.BASE_URL}tasks`, 
 				type: 'post', 
 				dataType: 'json', 
 				contentType: "application/json; charset=utf-8",
@@ -37,17 +39,13 @@ var inputBar = ( _ => {
 				},
 				crossDomain: true, 
 				success: function(data) {
-					todoList.addTask(data);
-					$inputWrap.find('#newTask').val('');
-				}, 
+					App.todoList.addTask(data);
+					this[$inputWrap].find('#newTask').val('');
+				}.bind(this), 
 				error: function(jqXHR) {
 					console.dir(jqXHR);
 				}
 			});
 		}
 	}
-
-	return {
-		init
-	}
-})();
+}

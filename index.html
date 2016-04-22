@@ -61,10 +61,11 @@
 		<script src="./asset/js/todoList.js"></script>
 		<script>
 			$(document).ready(function() {
-				window.BASE_URL = 'https://richegg.top/';
-				listName.init();
-				inputBar.init();
-				todoList.init();
+				window.App = {};
+				App.BASE_URL = 'https://richegg.top/';
+				App.todoList = new TodoList();
+				App.listName = new ListName();
+				App.inputBar = new InputBar();
 			});
 		</script>
 	</body>
