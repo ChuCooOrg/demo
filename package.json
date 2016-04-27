@@ -11,6 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.4",
-    "express-urlrewrite": "^1.2.0"
+    "serve-index": "^1.7.3"
   }
 }
