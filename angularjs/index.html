@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8">
+    <title>ChuCooList</title>
+  </head>
+
+  <body ng-app="chuCooListApp">
+    <div ng-controller="AuthController as vm">
+      <form ng-submit="vm.auth()">
+        <input type="text" placeholder="清單名稱" ng-model="vm.listName" />
+      </form>
+
+      <button ng-click="vm.getItems()">get</button>
+
+      <form ng-submit="vm.addItem(vm.newItemText)">
+        <input type="text" ng-model="vm.newItemText" />
+      </form>
+
+      <ul>
+        <li ng-repeat="item in vm.listItems track by $index">
+          <span ng-bind="item.text"></span>
+          <input type="checkbox" ng-model="item.isDone" ng-change="vm.updateItem(item)" />
+          <button type="button" ng-click="vm.deleteItem(item.id)">delete</button>
+        </li>
+      </ul>
+
+    </div>
+
+    <script src="./node_modules/angular/angular.js"></script>
+    <script src="./app.js"></script>
+    <script src="./controller.js"></script>
+    <script src="./service.js"></script>
+  </body>
+</html>
