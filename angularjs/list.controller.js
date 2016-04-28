@@ -5,10 +5,11 @@
     .module('chuCooListApp')
     .controller('ListController', ListController);
 
-  ListController.$inject = ['ChuCoo', '$location'];
+  ListController.$inject = ['ChuCoo', '$location', '$mdToast'];
 
-  function ListController(ChuCoo, $location) {
+  function ListController(ChuCoo, $location, $mdToast) {
     var self = this;
+    self.message = "";
 
     if (!ChuCoo.isAuth) {
       $location.path('/');
@@ -16,11 +17,21 @@
 
     self.listItems = ChuCoo.tasks;
 
+    self.showToast = function(message) {
+      $mdToast.show(
+        $mdToast.simple()
+          .textContent(message)
+          .position("top right")
+          .hideDelay(1500)
+      );
+    }
+
     self.addItem = function(newItemText) {
       ChuCoo.addItem(newItemText)
         .then(function(res) {
           self.getItems();
         }, function(error) {
+          self.showToast(error.data.message);
           console.log(error);
         });
       self.newItemText = "";
@@ -31,6 +42,8 @@
         .then(function(res) {
           self.listItems = ChuCoo.tasks = res.data.tasks;
         }, function(error) {
+          self.listItems = ChuCoo.tasks = [];
+          self.showToast(error.data.message);
           console.log(error);
         });
     }
@@ -40,6 +53,7 @@
         .then(function(res) {
           self.getItems();
         }, function(error) {
+          self.showToast(error.data.message);
           console.log(error);
         });
     }
@@ -49,6 +63,7 @@
         .then(function(res) {
           self.getItems();
         }, function(error) {
+          self.showToast(error.data.message);
           console.log(error);
         });
     }

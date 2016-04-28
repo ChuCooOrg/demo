@@ -3,19 +3,18 @@
 </md-button>
 
 <div layout="row" flex>
-  <form ng-submit="vm.addItem(vm.newItemText)">
-    <md-input-container class="md-icon-float md-block">
-      <label>新事項</label>
-      <md-icon>name</md-icon>
-      <input ng-model="vm.newItemText" type="text">
-    </md-input-container>
-  </form>
-
+  <div layout="column" layout-padding>
+    <form ng-submit="vm.addItem(vm.newItemText)">
+      <md-input-container class="md-icon-float md-block">
+        <label>新事項</label>
+        <md-icon>add</md-icon>
+        <input ng-model="vm.newItemText" type="text">
+      </md-input-container>
+    </form>
+  </div>
   <md-content layout="row" flex>
     <div flex="5"></div>
     <div flex>
-
-
       <md-list-item ng-repeat="item in vm.listItems track by $index">
         <md-checkbox ng-model="item.isDone" ng-change="vm.updateItem(item)"></md-checkbox>
         <p ng-bind="item.text"></p>
@@ -23,6 +22,5 @@
       </md-list-item>
     </div>
     <div flex="5"></div>
-
   </md-content>
 </div>
