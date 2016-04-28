@@ -1,13 +1,28 @@
-<button ng-click="vm.getItems()">get</button>
+<md-button class="md-fab md-fab-bottom-right" ng-click="vm.getItems()">
+  <md-icon>refresh</md-icon>
+</md-button>
 
-<form ng-submit="vm.addItem(vm.newItemText)">
-  <input type="text" ng-model="vm.newItemText" />
-</form>
+<div layout="row" flex>
+  <form ng-submit="vm.addItem(vm.newItemText)">
+    <md-input-container class="md-icon-float md-block">
+      <label>新事項</label>
+      <md-icon>name</md-icon>
+      <input ng-model="vm.newItemText" type="text">
+    </md-input-container>
+  </form>
 
-<ul>
-  <li ng-repeat="item in vm.listItems track by $index">
-    <span ng-bind="item.text"></span>
-    <input type="checkbox" ng-model="item.isDone" ng-change="vm.updateItem(item)" />
-    <button type="button" ng-click="vm.deleteItem(item.id)">delete</button>
-  </li>
-</ul>
+  <md-content layout="row" flex>
+    <div flex="5"></div>
+    <div flex>
+
+
+      <md-list-item ng-repeat="item in vm.listItems track by $index">
+        <md-checkbox ng-model="item.isDone" ng-change="vm.updateItem(item)"></md-checkbox>
+        <p ng-bind="item.text"></p>
+        <md-icon class="md-secondary" ng-click="vm.deleteItem(item.id)">delete</md-icon>
+      </md-list-item>
+    </div>
+    <div flex="5"></div>
+
+  </md-content>
+</div>

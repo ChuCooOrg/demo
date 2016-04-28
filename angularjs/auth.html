@@ -1,3 +1,29 @@
-<form ng-submit="vm.auth(vm.listName)">
-  <input type="text" placeholder="清單名稱" ng-model="vm.listName" />
-</form>
+<div flex></div>
+  <md-content layout="column" layout-align="center center">
+    <form name="vm.authForm" ng-submit="vm.auth($event, vm.authForm, vm.listName)">
+      <md-input-container class="md-icon-float md-block">
+        <label>清單名稱</label>
+        <md-icon>person</md-icon>
+        <input
+          name="username"
+          type="text"
+          autocorrect="off"
+          spellcheck="false"
+          autocapitalize="off"
+          ng-model="vm.listName"
+          required>
+        <div ng-messages="vm.authForm.username.$error" role="alert">
+          <div ng-message="required">此欄位為必填</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container class="md-block">
+        <input
+          class="md-button md-raised"
+          type="submit"
+          value="Login">
+      </md-input-container>
+    </form>
+
+  </md-content>
+<div flex></div>

@@ -23,6 +23,7 @@
         }, function(error) {
           console.log(error);
         });
+      self.newItemText = "";
     }
 
     self.getItems = function() {

@@ -2,7 +2,13 @@
   'use strict';
 
   angular
-    .module('chuCooListApp', ['ngRoute'])
+    .module('chuCooListApp', [
+      'ngMaterial',
+      'ngRoute',
+      'ngAria',
+      'ngAnimate',
+      'ngMessages'
+    ])
     .config(config);
 
   config.$inject = ['$httpProvider', '$routeProvider'];
