@@ -2,13 +2,28 @@
   'use strict';
 
   angular
-    .module('chuCooListApp', [])
+    .module('chuCooListApp', ['ngRoute'])
     .config(config);
 
-  config.$inject = ['$httpProvider'];
+  config.$inject = ['$httpProvider', '$routeProvider'];
 
-  function config($httpProvider) {
+  function config($httpProvider, $routeProvider) {
     $httpProvider.defaults.withCredentials = true;
+
+    $routeProvider
+        .when('/', {
+          templateUrl: 'auth.html',
+          controller: 'AuthController',
+          controllerAs: 'vm',
+        })
+        .when('/list', {
+          templateUrl: 'list.html',
+          controller: 'ListController',
+          controllerAs: 'vm',
+        })
+        .otherwise({
+          redirectTo: '/'
+        });
   }
 
 })();

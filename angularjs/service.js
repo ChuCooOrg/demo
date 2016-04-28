@@ -11,6 +11,9 @@
   function ChuCoo($http) {
     this.baseUrl = 'https://richegg.top';
 
+    this.tasks = [];
+    this.isAuth = false;
+    
     this.auth = auth;
     this.getItems = getItems;
     this.addItem = addItem;

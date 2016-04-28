@@ -3,28 +3,22 @@
 
   angular
     .module('chuCooListApp')
-    .controller('AuthController', AuthController);
+    .controller('ListController', ListController);
 
-  AuthController.$inject = ['ChuCoo'];
+  ListController.$inject = ['ChuCoo', '$location'];
 
-  function AuthController(ChuCoo) {
+  function ListController(ChuCoo, $location) {
     var self = this;
 
-    self.listItems = [];
-
-    self.auth = function(listName) {
-      ChuCoo.auth(listName)
-        .then(function(res) {
-          self.listItems = res.data.tasks;
-        }, function(error) {
-          console.error(error);
-        });
+    if (!ChuCoo.isAuth) {
+      $location.path('/');
     }
+
+    self.listItems = ChuCoo.tasks;
 
     self.addItem = function(newItemText) {
       ChuCoo.addItem(newItemText)
         .then(function(res) {
-          console.log(res);
           self.getItems();
         }, function(error) {
           console.log(error);
@@ -34,8 +28,7 @@
     self.getItems = function() {
       ChuCoo.getItems()
         .then(function(res) {
-          console.log(res);
-          self.listItems = res.data.tasks;
+          self.listItems = ChuCoo.tasks = res.data.tasks;
         }, function(error) {
           console.log(error);
         });
@@ -44,7 +37,6 @@
     self.updateItem = function(item) {
       ChuCoo.updateItem(item)
         .then(function(res) {
-          console.log("success");
           self.getItems();
         }, function(error) {
           console.log(error);
@@ -54,7 +46,6 @@
     self.deleteItem = function(itemId) {
       ChuCoo.deleteItem(itemId)
         .then(function(res) {
-          console.log("success");
           self.getItems();
         }, function(error) {
           console.log(error);
