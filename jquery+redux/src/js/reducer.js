@@ -32,7 +32,7 @@ function tasks(state = [], action) {
 				...state.slice(index +1, state.length)
 			];
 		case 'GET_ALL_TASKS': 
-			return state;
+			return action.data.tasks;
 		default: 
 			return state;
 	}

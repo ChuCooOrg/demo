@@ -6,17 +6,25 @@ import '../static/css/style';
 
 window.BASE_URL = 'https://richegg.top/';
 var App = ( _ => {
-	var store, unsubscribe;
+	var store = createStore(todoApp);
+	var unsubscribe = store.subscribe(render);
 
 	function init() {
-		_getTODOS()
-			.then((tasks) => _initState(tasks))
+		getTODOS()
+			.then((tasks) => {
+				store.dispatch({
+					type: 'GET_ALL_TASKS', 
+					data: {
+						tasks
+					}
+				});
+			})
 			.catch((err) => {
 				console.log(err);
 			});
 	}
 
-	function _getTODOS() {
+	function getTODOS() {
 		return new Promise((resolve, reject) => {
 			$.ajax({
 				url: `${BASE_URL}lists`, 
@@ -42,16 +50,6 @@ var App = ( _ => {
 				}
 			});
 		});
-	}
-
-	function _initState(tasks) {
-		store = createStore(todoApp, {
-			tasks
-		});
-		unsubscribe = store.subscribe(render);
-		render();
-		TaskInput.init(store);
-		TodoList.init(store);
 	}
 
 	function render() {
@@ -84,8 +82,11 @@ var App = ( _ => {
 		init, 
 		render, 
 		unsubscribe, 
-		store
+		store, 
+		getTODOS
 	}
 })();
 
 App.init();
+TaskInput.init(App.store);
+TodoList.init(App.store);
