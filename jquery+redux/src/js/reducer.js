@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 function visibility(state = 'All', action) {
-	switch(action) {
+	switch(action.type) {
 		case 'SET_VISIBILITY': 
 			return action.data.filter;
 		default:
