@@ -31,6 +31,8 @@ function tasks(state = [], action) {
 				...state.slice(0, index), 
 				...state.slice(index +1, state.length)
 			];
+		case 'GET_ALL_TASKS': 
+			return state;
 		default: 
 			return state;
 	}
