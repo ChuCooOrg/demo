@@ -1,0 +1,33 @@
+#statusWrap {
+	margin-top: 50px;
+}
+#listWrap {
+	margin-top: 20px;
+}
+#listWrap .task .taskStatus {
+	border: 1px solid #CCC;
+	border-radius: 25px;
+	color: green;
+	margin-right: 10px;
+	cursor: pointer;
+	width: 28.02px;
+	height: 28px;
+	display: inline-block;
+	text-align: center;
+	line-height: 28px;
+	vertical-align: middle;
+}
+#listWrap .task .taskStatus.yet .glyphicon {
+	display: none;
+}
+#listWrap .task .btn-delTask {
+	color: #FF6F6F;
+	cursor: pointer;
+	display: none;
+}
+#listWrap .task .btn-delTask:hover {
+	color: #FF0000;
+}
+#listWrap .task:hover .btn-delTask {
+	display: initial;
+}

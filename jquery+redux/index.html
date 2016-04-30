@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>TODO List - Redux</title>
+		<meta charset="utf-8">
+		<link rel="icon" href="data:;base64,=">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">TODO List</a>
+				</div>
+			</div>
+		</nav>
+		<div class="container">
+			<div id="addTaskWrap" class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<div class="input-group">
+						<input id="addTaskInput" type="text" class="form-control" placeholder="New task">
+						<span class="input-group-btn">
+							<button id="btn-addTask" class="btn btn-primary" type="button">Add task</button>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div id="statusWrap" class="row">
+				<div class="col-md-12">
+					<span class="label label-success">Done : <span class="doneNum">10</span></span>
+					<span class="label label-danger">Yet : <span class="yetNum">50</span></span>
+				</div>
+			</div>
+			<div class="row">
+				<div id="listWrap" class="col-md-12">
+					<ul class="list-group">
+						<li class="list-group-item task">
+							<span class="taskStatus"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span>
+							Cras justo odio
+							<span class="glyphicon glyphicon-remove btn-delTask pull-right" aria-hidden="true"></span>
+						</li>
+						<li class="list-group-item task">
+							<span class="taskStatus"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span>
+							Cras justo odio
+							<span class="glyphicon glyphicon-remove btn-delTask pull-right" aria-hidden="true"></span>
+						</li>
+						<li class="list-group-item task">
+							<span class="taskStatus"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span>
+							Cras justo odio
+							<span class="glyphicon glyphicon-remove btn-delTask pull-right" aria-hidden="true"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script src="./build/bundle.js"></script>
+	</body>
+</html>
