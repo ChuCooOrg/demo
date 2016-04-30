@@ -22,10 +22,26 @@ var TodoList = (_ => {
 
 	function _handleDelTask() {
 		var id = $(this).parent('.task').attr('data-taskid');
-		_store.dispatch({
-			type: 'DELETE_TASK', 
-			data: {
-				id
+		$.ajax({
+			url: `${BASE_URL}tasks/${id}`, 
+			type: 'delete', 
+			dataType: 'json', 
+			contentType: "application/json; charset=utf-8",
+			xhrFields: {
+				withCredentials: true
+			},
+			crossDomain: true, 
+			success: function(data) {
+				console.log(data);
+				_store.dispatch({
+					type: 'DELETE_TASK', 
+					data: {
+						id
+					}
+				});
+			}, 
+			error: function(jqXHR) {
+				console.dir(jqXHR);
 			}
 		});
 	}
