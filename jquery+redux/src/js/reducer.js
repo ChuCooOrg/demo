@@ -1,5 +1,14 @@
 import { combineReducers } from 'redux';
 
+function visibility(state = 'All', action) {
+	switch(action) {
+		case 'SET_VISIBILITY': 
+			return action.data.filter;
+		default:
+			return state;
+	}
+}
+
 function tasks(state = [], action) {
 	switch (action.type) {
 		case 'ADD_TASK':
@@ -39,7 +48,8 @@ function tasks(state = [], action) {
 }
 
 const todo = combineReducers({
-	tasks
+	tasks, 
+	visibility
 });
 
 export default todo;
