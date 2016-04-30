@@ -4,12 +4,55 @@ import TaskInput from './js/TaskInput';
 import TodoList from './js/TodoList';
 import '../static/css/style';
 
-
+window.BASE_URL = 'https://richegg.top/';
 var App = ( _ => {
-	localStorage.ReduxState = localStorage.ReduxState || JSON.stringify({});
-	var initState = JSON.parse(localStorage.ReduxState);
-	var store = createStore(todoApp, initState);
-	var unsubscribe = store.subscribe(render);
+	var store, unsubscribe;
+
+	function init() {
+		_getTODOS()
+			.then((tasks) => _initState(tasks))
+			.catch((err) => {
+				console.log(err);
+			});
+	}
+
+	function _getTODOS() {
+		return new Promise((resolve, reject) => {
+			$.ajax({
+				url: `${BASE_URL}lists`, 
+				type: 'post', 
+				dataType: 'json', 
+				contentType: "application/json; charset=utf-8",
+				data: JSON.stringify({
+					listName: 'moli'
+				}), 
+				xhrFields: {
+					withCredentials: true
+				},
+				crossDomain: true, 
+				success: function(data, successCode, jqXHR) {
+					if(jqXHR.status == 201) {
+						resolve(data.tasks);
+					} else {
+						resolve([]);
+					}
+				}, 
+				error: function(jqXHR) {
+					console.dir(jqXHR);
+				}
+			});
+		});
+	}
+
+	function _initState(tasks) {
+		store = createStore(todoApp, {
+			tasks
+		});
+		unsubscribe = store.subscribe(render);
+		render();
+		TaskInput.init(store);
+		TodoList.init(store);
+	}
 
 	function render() {
 		var state = store.getState();
@@ -35,18 +78,14 @@ var App = ( _ => {
 		// update count 
 		$('#statusWrap').find('.doneNum').text(doneNum);
 		$('#statusWrap').find('.yetNum').text(yetNum);
-
-		// store state to localstorage
-		localStorage.ReduxState = JSON.stringify(state);
 	}
 
 	return {
+		init, 
 		render, 
 		unsubscribe, 
 		store
 	}
 })();
 
-App.render();
-TaskInput.init(App.store);
-TodoList.init(App.store);
+App.init();
