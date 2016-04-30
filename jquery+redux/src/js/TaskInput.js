@@ -30,14 +30,33 @@ var TaskInput = (_ => {
 	function _handleAddTask() {
 		var text = $inputWrap.find('#addTaskInput').val();
 		if(text) {
-			_store.dispatch({
-				type: 'ADD_TASK', 
-				data: {
-					id: Date.now(), 
+
+			$.ajax({
+				url: `${BASE_URL}tasks`, 
+				type: 'post', 
+				dataType: 'json', 
+				contentType: "application/json; charset=utf-8",
+				data: JSON.stringify({
 					text
+				}), 
+				xhrFields: {
+					withCredentials: true
+				},
+				crossDomain: true, 
+				success: function(data) {
+					_store.dispatch({
+						type: 'ADD_TASK', 
+						data: {
+							id: Date.now(), 
+							text
+						}
+					});
+					$inputWrap.find('#addTaskInput').val('');
+				}.bind(this), 
+				error: function(jqXHR) {
+					console.dir(jqXHR);
 				}
 			});
-			$inputWrap.find('#addTaskInput').val('');
 		}
 	}
 
