@@ -47,7 +47,7 @@ var TaskInput = (_ => {
 					_store.dispatch({
 						type: 'ADD_TASK', 
 						data: {
-							id: Date.now(), 
+							id: data.id, 
 							text
 						}
 					});
